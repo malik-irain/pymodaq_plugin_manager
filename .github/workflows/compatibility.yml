@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pymodaq-version: ["4.4.x", "5.0.x_dev"]
+        pymodaq-version: ["4.4.x", ""]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
@@ -31,8 +31,12 @@ jobs:
           source venv/bin/activate
           python -m pip install --upgrade pip
           pip install hatch pyqt5
-          pip install git+https://github.com/PyMoDAQ/PyMoDAQ.git@${{ matrix.pymodaq-version }}
-
+          if [[ -z "$var" ]]; then
+            pip install git+https://github.com/PyMoDAQ/PyMoDAQ.git
+          else
+            pip install git+https://github.com/PyMoDAQ/PyMoDAQ.git@${{ matrix.pymodaq-version }}
+          fi
+          
       - name: Run script
         run: |
           source venv/bin/activate
