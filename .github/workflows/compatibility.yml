@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pymodaq-version: ["4.4.x", "5.0.x_dev"]
+        pymodaq-version: ["4.4.x", "HEAD"] # HEAD = last commit on default branch
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
